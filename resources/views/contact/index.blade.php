@@ -9,7 +9,7 @@
                     <div class="row mr-auto">
                         <span>Categories</span>
                         <span class="ml-4">
-                        <a href="{{ route('companies.create') }}">Add new</a>
+                        <a href="{{ route('contacts.create') }}">Add new</a>
                         </span>
                     </div>
                 </div>
@@ -19,24 +19,26 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Logo</th>
-                            <th scope="col">Company</th>
-                            <th scope="col">Contact Name</th>
-                            <th scope="col">Phone/Email</th>
+                            <th scope="col">Photo</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Company Name</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @forelse($companies as $company)
+                        @forelse($contacts as $contact)
                         <tr>
-                            <th scope="row">{{ $company->id }}</th>
-                            <td>{{ $company->logo }}</td>
-                            <td>{{ $company->name }}</td>
-                            <td>{{ $company->contact_name }}</td>
-                            <td>{{ $company->phone }} / {{ $company->email }}</td>
+                            <th scope="row">{{ $contact->id }}</th>
+                            <td>{{ $contact->photo }}</td>
+                            <td>{{ $contact->name }}</td>
+                            <td>{{ $contact->company->name }}</td>
+                            <td>{{ $contact->phone }}</td>
+                            <td>{{ $contact->email }}</td>
                             <td class="row">
-                                <a href="{{ route('companies.edit', ['company' => $company->id]) }}" class="btn btn-primary ml-2">Edit</a>
-                                <form action="{{ url('/companies', ['id' => $company->id]) }}" method="post">
+                                <a href="{{ route('contacts.edit', ['contact' => $contact->id]) }}" class="btn btn-primary ml-2">Edit</a>
+                                <form action="{{ url('/companies', ['id' => $contact->id]) }}" method="post">
                                     <input class="btn btn-danger ml-2" type="submit" value="Delete" />
                                     @method('delete')
                                     @csrf

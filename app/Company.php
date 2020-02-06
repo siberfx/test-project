@@ -16,8 +16,8 @@ class Company extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function detail()
+    public function contact()
     {
-        return $this->hasOne(CompanyDetail::class);
+        return $this->hasOne(Contact::class);
     }
 }

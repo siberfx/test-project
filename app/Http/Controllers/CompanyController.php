@@ -14,11 +14,11 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::with('detail')->get()->map(function ($company) {
+        $companies = Company::with('contact')->get()->map(function ($company) {
 
-            $company->contact_name = $company->detail->contact_name;
-            $company->email = $company->detail->email;
-            $company->phone = $company->detail->phone;
+            $company->contact_name = $company->contact->contact_name;
+            $company->email = $company->contact->email;
+            $company->phone = $company->contact->phone;
 
             return $company;
         });
@@ -56,7 +56,7 @@ class CompanyController extends Controller
 
         $company->save();
 
-        $company->detail()->create([
+        $company->contact()->create([
             'contact_name' => $request->contact_name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -95,7 +95,7 @@ class CompanyController extends Controller
             'address' => $request->address,
             'website' => $request->website,
         ]);
-        $company->detail()->update([
+        $company->contact()->update([
             'contact_name' => $request->contact_name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -111,8 +111,8 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        if (Company::count() > 1) {
-            $company->detail()->delete();
+
+        if ($company->contact()->count() == 0) {
             $company->delete();
         }
 
