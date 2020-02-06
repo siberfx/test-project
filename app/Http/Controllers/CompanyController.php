@@ -111,8 +111,10 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        $company->detail()->delete();
-        $company->delete();
+        if (Company::count() > 1) {
+            $company->detail()->delete();
+            $company->delete();
+        }
 
         return redirect()->route('companies.index');
 
