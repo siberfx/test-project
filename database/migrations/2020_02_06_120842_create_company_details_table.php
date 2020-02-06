@@ -15,6 +15,7 @@ class CreateCompanyDetailsTable extends Migration
     {
         Schema::create('company_details', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('company_id');
             $table->string('contact_name')->unique();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();

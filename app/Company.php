@@ -13,8 +13,11 @@ class Company extends Model
         'website',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function detail()
     {
-        return $this->belongsTo(Company::class);
+        return $this->hasOne(CompanyDetail::class);
     }
 }
