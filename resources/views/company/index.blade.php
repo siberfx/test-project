@@ -34,9 +34,13 @@
                             <td>{{ $company->name }}</td>
                             <td>{{ $company->contact_name }}</td>
                             <td>{{ $company->phone }} / {{ $company->email }}</td>
-                            <td>
-                                <a href="#" class="btn btn-primary">Edit</a>
-                                <a href="#" class="btn btn-warning">Delete</a>
+                            <td class="row">
+                                <a href="{{ route('companies.edit', ['company' => $company->id]) }}" class="btn btn-primary">Edit</a>
+                                <form action="{{ url('/companies', ['id' => $company->id]) }}" method="post">
+                                    <input class="btn btn-danger ml-2" type="submit" value="Delete" />
+                                    @method('delete')
+                                    @csrf
+                                </form>
                             </td>
                         </tr>
                         @empty

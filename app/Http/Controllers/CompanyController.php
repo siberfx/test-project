@@ -75,29 +75,46 @@ class CompanyController extends Controller
 
     /**
      * @param Company $company
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Company $company)
     {
-        //
+        return view('company.edit', compact('company'));
     }
 
     /**
      * @param Request $request
      * @param Company $company
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Company $company)
     {
-        //
+
+        $company->update([
+            'name' => $request->name,
+            'address' => $request->address,
+            'website' => $request->website,
+        ]);
+        $company->detail()->update([
+            'contact_name' => $request->contact_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+        ]);
+
+        return redirect()->route('companies.index');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Company  $company
-     * @return \Illuminate\Http\Response
+     * @param Company $company
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Company $company)
     {
-        //
+        $company->detail()->delete();
+        $company->delete();
+
+        return redirect()->route('companies.index');
+
     }
 }
