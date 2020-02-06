@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class CompanyDetail extends Model
 {
     protected $fillable = [
-        'logo',
-        'name',
-        'address',
-        'website',
+        'company_id',
+        'contact_name',
+        'phone',
+        'email',
     ];
 
     public function detail()
